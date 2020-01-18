@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 // auth
-import { LoginComponent } from 'src/app/user';
+import { LoginComponent, AuthGuard } from 'src/app/user';
 
 // core
 import { CoreLayoutComponent } from 'src/app/core';
@@ -13,6 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'app', component: CoreLayoutComponent,
+    canActivateChild: [AuthGuard],
     children: [
       {
         path: 'photo',

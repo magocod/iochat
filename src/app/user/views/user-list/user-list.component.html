@@ -1,2 +1,30 @@
-list
 
+<ion-content fullscreen>
+
+	<ion-fab
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+  >
+    <ion-fab-button (click)="createUser()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-list>
+    <ion-list-header>
+      Recent Conversations
+    </ion-list-header>
+
+    <ion-item *ngFor="let user of dataSource; index as userindex">
+      <ion-avatar slot="start">
+        <img src="assets/logo_cordova.png">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ user.username }}</h2>
+        <h3>{{ user.email }}</h3>
+        <p>{{ user.first_name }} {{ user.last_name }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

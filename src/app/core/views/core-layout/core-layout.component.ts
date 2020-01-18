@@ -16,7 +16,7 @@ export class CoreLayoutComponent {
     {
       title: 'Photo',
       url: '/app/photo',
-      icon: 'home'
+      icon: 'camera'
     },
     {
       title: 'List',
@@ -26,7 +26,7 @@ export class CoreLayoutComponent {
     {
       title: 'Users',
       url: '/app/users',
-      icon: 'list'
+      icon: 'people'
     }
   ];
 

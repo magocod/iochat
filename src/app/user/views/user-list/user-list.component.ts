@@ -28,16 +28,6 @@ export class UserListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // const observable: Observable<IDjangoUser[]> = this.userservice.getUsers();
-
-    // observable.subscribe({
-    //   next: (val) => console.log(val),
-    //   complete: () => console.log('Complete!'),
-    //   error: (val) => {
-    //     console.log(`observable Error: ${val}`);
-    //     this.toastr.error('observable', 'Error');
-    //   },
-    // });
 
     this.userservice.getUsers().subscribe((response) => {
       // console.log(response);
@@ -50,7 +40,7 @@ export class UserListComponent implements OnInit {
    * [createUser description]
    */
   createUser(): void {
-    this.router.navigate(['/chat/users/create/']);
+    this.router.navigate(['/app/users/create/']);
   }
 
   /**
@@ -58,7 +48,7 @@ export class UserListComponent implements OnInit {
    */
   editUser(userid: number): void {
     this.router.navigate([
-      '/chat/users/user/',
+      '/app/users/user/',
       userid
     ]);
   }
