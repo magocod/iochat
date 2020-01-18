@@ -1,0 +1,8 @@
+{
+  "name": "iochat",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}
