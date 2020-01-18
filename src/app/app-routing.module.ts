@@ -1,19 +1,32 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+// auth
+import { LoginComponent } from 'src/app/user';
+
+// core
+import { CoreLayoutComponent } from 'src/app/core';
+
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    path: '', component: LoginComponent
   },
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
-  },
-  {
-    path: 'list',
-    loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
+    path: 'app', component: CoreLayoutComponent,
+    children: [
+      {
+        path: 'photo',
+        loadChildren: () => import('./photo/photo.module').then(m => m.PhotoModule)
+      },
+      {
+        path: 'list',
+        loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
+      },
+      {
+        path: 'users',
+        loadChildren: () => import('./user/user.module').then(m => m.UserModule)
+      }
+    ],
   }
 ];
 

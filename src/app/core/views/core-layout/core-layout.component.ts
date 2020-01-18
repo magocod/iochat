@@ -1,29 +1,31 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss']
+  selector: 'app-core-layout',
+  templateUrl: './core-layout.component.html',
+  styleUrls: ['./core-layout.component.scss'],
 })
-export class AppComponent {
+export class CoreLayoutComponent {
+
   public appPages = [
     {
-      title: 'Home',
-      url: '/home',
+      title: 'Photo',
+      url: '/app/photo',
       icon: 'home'
     },
     {
       title: 'List',
-      url: '/list',
+      url: '/app/list',
       icon: 'list'
     },
     {
       title: 'Users',
-      url: '/users',
+      url: '/app/users',
       icon: 'list'
     }
   ];
@@ -31,7 +33,8 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private router: Router,
   ) {
     this.initializeApp();
   }
@@ -42,4 +45,12 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
+
+  /**
+   * [redirect description]
+   */
+  redirect(routeName: string): void {
+    this.router.navigate([routeName]);
+  }
+
 }
