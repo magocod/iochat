@@ -25,7 +25,7 @@ export class UserListComponent implements OnInit {
   // dataSource: IDjangoUser[] = [];
 
   constructor(
-    private userservice: UserService,
+    public userservice: UserService,
     private router: Router,
   ) {
     this.data = true;
