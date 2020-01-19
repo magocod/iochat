@@ -102,8 +102,9 @@ export class UserCreateComponent implements OnInit {
       this.createForm.value
     ).subscribe((value: IDjangoUser) => {
       console.log(value);
+      this.userservice.addUser(value);
       this.createForm.reset();
-      this.router.navigate(['/chat/users']);
+      this.router.navigate(['/app/users']);
     });
   }
 

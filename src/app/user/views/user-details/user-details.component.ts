@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 
+import { AlertController } from '@ionic/angular';
+
 import { UserService, IDjangoUser } from 'src/app/user/services';
 
 @Component({
@@ -27,7 +29,8 @@ export class UserDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private userservice: UserService
+    private userservice: UserService,
+    public alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -39,6 +42,45 @@ export class UserDetailsComponent implements OnInit {
         this.userDetails = value;
       });
     });
+  }
+
+  /**
+   * [deleteUser description]
+   */
+  deleteUser(id: number) {
+    this.userservice.deleteUser(id).subscribe((response) => {
+      console.log(response);
+      this.userservice.removeUser(id);
+      this.router.navigate(['/app/users/']);
+    });
+  }
+
+  /**
+   * [presentAlertConfirm description]
+   */
+  async presentAlertConfirm(id: number) {
+    const alert = await this.alertController.create({
+      header: 'Delete Confirm!',
+      message: 'Message <strong>text</strong>!!!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.deleteUser(id);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }

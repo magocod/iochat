@@ -17,8 +17,9 @@ import { IDjangoUserADD, IDjangoUser } from './interfaces';
  */
 export class UserService {
 
-  apiURL: string = environment.chatapiurl;
+  apiURL = environment.chatapiurl;
   httpOptions = DjChatHttpOptions;
+  users: IDjangoUser[] = [];
 
   constructor(
     private http: HttpClient,
@@ -27,14 +28,24 @@ export class UserService {
   /**
    * [getUsers description]
    */
-  public getUsers(): Observable<IDjangoUser[]> {
-    return this.http.get<IDjangoUser[]>(
+  public getUsers() {
+    const $request = this.http.get<IDjangoUser[]>(
       `${this.apiURL}/users/`,
       this.httpOptions
     ).pipe(
       catchError(handleError),
       notifyError()
     );
+    $request.subscribe((values: IDjangoUser[]) => {
+      this.users = values;
+    });
+  }
+
+  /**
+   * [listUser description]
+   */
+  public listUser(): IDjangoUser[] {
+    return this.users;
   }
 
   /**
@@ -65,6 +76,21 @@ export class UserService {
   }
 
   /**
+   * [addUser description]
+   */
+  public addUser(value: IDjangoUser): void {
+    const exist = this.users.map((user: IDjangoUser) => {
+      return user.id;
+    }).includes(value.id);
+
+    if (exist === false) {
+      const temp = [...this.users];
+      temp.push(value);
+      this.users = temp;
+    }
+  }
+
+  /**
    * [updateUser description]
    */
   public updateUser(userdata: IDjangoUserADD, id: number): Observable<IDjangoUser> {
@@ -84,10 +110,21 @@ export class UserService {
   public deleteUser(id: number): Observable<any> {
     return this.http.delete(
       `${this.apiURL}/user/${id.toString()}/`
-    ).pipe(
+    ).pipe( 
       catchError(handleError),
       notifyError()
     );
+  }
+
+  /**
+   * [removeUser description]
+   */
+  public removeUser(id: number): void {
+    this.users = this.users.filter((user: IDjangoUser) => {
+      if (user.id !== id) {
+        return user;
+      }
+    });
   }
 
 }

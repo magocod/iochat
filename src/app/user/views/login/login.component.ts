@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
+import { of } from 'rxjs';
+import { catchError, finalize } from 'rxjs/operators';
+
 import {
   FormBuilder,
   FormControl,
@@ -12,6 +16,8 @@ import {
   ICredentials,
   IDJTokenResponse
 } from 'src/app/user/services';
+
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -36,6 +42,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private auth: AuthService,
+    public loadingController: LoadingController
   ) {
     this.checkoutForm = this.formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -81,15 +88,33 @@ export class LoginComponent implements OnInit {
   /**
    * [onSubmit description]
    */
-  onSubmit(form: FormControl): void {
+  async onSubmit(form: FormControl) {
     // Process checkout data here
-    console.log(form);
-    console.log(form.value);
-    this.auth.login(form.value).subscribe((value: IDJTokenResponse) => {
-      console.log(value);
-      this.auth.setToken(value);
-      this.checkoutForm.reset();
-      this.router.navigate(['/app/photo']);
+    // console.log(form);
+    // console.log(form.value);
+    const loading = await this.loadingController.create({
+      message: 'Please Wait...',
+      // duration: 2000
+    });
+    await loading.present();
+    const $loading = this.auth.login(form.value).pipe(
+      catchError((err) => {
+        return of(err);
+      }),
+      finalize(() => {
+        loading.dismiss();
+      })
+    )
+
+    $loading.subscribe((value: IDJTokenResponse) => {
+      if (typeof value !== 'string') {
+        console.log('success', value);
+        this.auth.setToken(value);
+        this.checkoutForm.reset();
+        this.router.navigate(['/app/photo']);
+      } else {
+        console.log('error', value);
+      }
     });
   }
 

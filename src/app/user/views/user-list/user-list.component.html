@@ -1,30 +1,76 @@
 
 <ion-content fullscreen>
 
-	<ion-fab
-    vertical="bottom"
-    horizontal="end"
-    slot="fixed"
-  >
-    <ion-fab-button (click)="createUser()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+  <div *ngIf="data">
+  <!--   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+      <ion-fab-button color="primary">
+        <ion-icon name="arrow-dropleft"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="start">
+        <ion-fab-button size="large" (click)="createUser()" color="primary">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button color="primary">
+          <ion-icon name="archive"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab> -->
 
-  <ion-list>
+  	<ion-fab
+      vertical="bottom"
+      horizontal="end"
+      slot="fixed"
+    >
+      <ion-fab-button (click)="createUser()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+    <ion-list>
+      <ion-list-header>
+        <!-- Recent Conversations -->
+        <br>
+      </ion-list-header>
+
+      <ion-item
+        (click)="editUser(user.id)"
+        *ngFor="let user of userservice.listUser(); index as userindex"
+      >
+        <ion-avatar slot="start">
+          <img src="assets/logo_cordova.png">
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ user.username }}</h2>
+          <h3>{{ user.email }}</h3>
+          <p>{{ user.first_name }} {{ user.last_name }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="!data">
     <ion-list-header>
-      Recent Conversations
+      <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
     </ion-list-header>
 
-    <ion-item *ngFor="let user of dataSource; index as userindex">
-      <ion-avatar slot="start">
-        <img src="assets/logo_cordova.png">
-      </ion-avatar>
-      <ion-label>
-        <h2>{{ user.username }}</h2>
-        <h3>{{ user.email }}</h3>
-        <p>{{ user.first_name }} {{ user.last_name }}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+    <ion-list>
+      <ion-item>
+        <ion-avatar slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-avatar>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
 </ion-content>

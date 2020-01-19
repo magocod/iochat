@@ -12,6 +12,8 @@ import { UserService, IDjangoUser } from 'src/app/user/services';
 })
 export class UserListComponent implements OnInit {
 
+  data: boolean;
+
   displayedColumns: string[] = [
     'id',
     // 'username',
@@ -20,20 +22,29 @@ export class UserListComponent implements OnInit {
     'action'
   ];
 
-  dataSource: IDjangoUser[] = [];
+  // dataSource: IDjangoUser[] = [];
 
   constructor(
     private userservice: UserService,
     private router: Router,
-  ) { }
+  ) {
+    this.data = true;
+  }
 
   ngOnInit() {
+    this.userservice.getUsers();
+    // this.userservice.getUsers().subscribe((response) => {
+    //   console.log(response);
+    //   this.data = true;
+    //   this.dataSource = response;
+    // });
+  }
 
-    this.userservice.getUsers().subscribe((response) => {
-      // console.log(response);
-      this.dataSource = response;
-    });
-
+  /**
+   * [dataSource description]
+   */
+  get dataSource() {
+    return this.userservice.listUser();
   }
 
   /**
@@ -59,11 +70,12 @@ export class UserListComponent implements OnInit {
   deleteUser(id: number, index: number) {
     this.userservice.deleteUser(id).subscribe((response) => {
       // this.dataSource.splice(index, 1);
-      this.dataSource = this.dataSource.filter((u: IDjangoUser, i: number) => {
-        if (i !== index) {
-          return u;
-        }
-      });
+      // this.dataSource = this.dataSource.filter((u: IDjangoUser, i: number) => {
+      //   if (i !== index) {
+      //     return u;
+      //   }
+      // });
+      this.userservice.removeUser(id);
     });
   }
 
