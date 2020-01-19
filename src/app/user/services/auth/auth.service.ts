@@ -100,4 +100,18 @@ export class AuthService {
     return false;
   }
 
+  /**
+   * [userRole description]
+   */
+  userRole(): boolean {
+    return false;
+  }
+
+  /**
+   * [userHasPermissions description]
+   */
+  userHasPermissions(permissions: number[]): boolean {
+    return false;
+  }
+
 }

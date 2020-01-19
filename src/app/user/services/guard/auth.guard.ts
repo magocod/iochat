@@ -10,6 +10,13 @@ import {
 import { Observable } from 'rxjs';
 
 import { AuthService } from '../auth';
+import { IAuthRoute } from './interfaces';
+
+/**
+ * [routeData description]
+ * Note: IAuthRoute + ...others 
+ */
+export type routeData = IAuthRoute;
 
 @Injectable({
   providedIn: 'root'
@@ -24,11 +31,11 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    console.log('AuthGuard#canActivate called');
+    // console.log('AuthGuard#canActivate called');
     // tslint:disable-next-line
     let url: string = state.url;
 
-    return this.checkLogin(url);
+    return this.checkLogin(url, next);
     // return true;
   }
 
@@ -38,11 +45,31 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     return this.canActivate(route, state);
   }
 
-  checkLogin(url: string): boolean {
+  checkLogin(url: string, next: ActivatedRouteSnapshot): boolean {
     return true;
+    // console.log(next.data);
+    const routedata = next.data as routeData;
+
+    // authenticated
     if (this.authService.isLoggedIn()) {
       return true;
     }
+
+    // roles
+    // if (next.data.roles.includes(this.authService.userRole())) {
+    //   return true;
+    // } else {
+    //   this.router.navigate(['/routeName']);
+    //   return false;
+    // }
+
+    // permissions
+    // if (this.authService.userHasPermissions(next.data.permissions)) {
+    //   return true;
+    // } else {
+    //   this.router.navigate(['/routeName']);
+    //   return false;
+    // }
 
     // Store the attempted URL for redirecting
     this.authService.redirectUrl = url;

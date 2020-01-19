@@ -24,6 +24,11 @@ export class CoreLayoutComponent {
       icon: 'list'
     },
     {
+      title: 'Chat',
+      url: '/app/chats',
+      icon: 'chatbubbles'
+    },
+    {
       title: 'Users',
       url: '/app/users',
       icon: 'people'
