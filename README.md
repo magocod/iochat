@@ -1,8 +1,8 @@
 # Iochat
 
-> Ionic: https://ionicframework.com/
-> Angular: https://angular.io/
-> Capacitor: https://capacitor.ionicframework.com/
+* Ionic: https://ionicframework.com/
+* Angular: https://angular.io/
+* Capacitor: https://capacitor.ionicframework.com/
 
 ## Demo Apk
 
