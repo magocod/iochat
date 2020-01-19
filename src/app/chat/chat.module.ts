@@ -5,7 +5,8 @@ import { CommonModule } from '@angular/common';
 // third party
 import { IonicModule } from '@ionic/angular';
 
-// locale
+// local modules
+import { CoreModule } from 'src/app/core';
 import { ChatRoutingModule } from './chat.routing.module';
 
 import {
@@ -29,6 +30,7 @@ import {
     CommonModule,
     ReactiveFormsModule,
     ChatRoutingModule,
+    CoreModule,
     // third party
     IonicModule
   ],
