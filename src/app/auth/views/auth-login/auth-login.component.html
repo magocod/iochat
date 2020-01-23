@@ -2,6 +2,14 @@
   <ion-title>
    IO-CHAT
   </ion-title>
+  <ion-buttons slot="primary">
+    <ion-button (click)="presentModal()">
+      <ion-icon
+      	slot="icon-only"
+      	name="information-circle"
+      ></ion-icon>
+    </ion-button>
+  </ion-buttons>
 </ion-toolbar>
 
 <ion-content>
@@ -63,13 +71,5 @@
 	    </form>
 	  </ion-card-content>
 	</ion-card>
-
-  <ion-button
-  	*ngFor="let example of exampleusers; index as userindex"
-    (click)="setUser(userindex)"
-    color="primary"
-   >
-    {{ example.email }}
-  </ion-button>
 
 </ion-content>

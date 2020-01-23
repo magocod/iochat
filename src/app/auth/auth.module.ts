@@ -11,12 +11,17 @@ import { IonicModule } from '@ionic/angular';
 import { AuthInterceptor } from './services';
 
 import {
-  LoginComponent
+  AuthLoginComponent,
 } from './views';
+
+import {
+  AuthUsersModalComponent,
+} from './components';
 
 @NgModule({
   declarations: [
-  	LoginComponent
+  	AuthLoginComponent,
+    AuthUsersModalComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +30,10 @@ import {
     IonicModule
   ],
   exports: [
-  	LoginComponent
+  	AuthLoginComponent
+  ],
+  entryComponents: [
+    AuthUsersModalComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

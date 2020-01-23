@@ -18,17 +18,16 @@ import {
 } from '../../services';
 import { IDjangoUser } from 'src/app/user';
 
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
+
+import { AuthUsersModalComponent, IModalEvent } from '../../components/auth-users-modal';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-auth-login',
+  templateUrl: './auth-login.component.html',
+  styleUrls: ['./auth-login.component.scss'],
 })
-/**
- *
- */
-export class LoginComponent implements OnInit {
+export class AuthLoginComponent implements OnInit {
 
   exampleusers: ICredentials[] = [
     { email: 'admin@django.com', password: '123' },
@@ -43,7 +42,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private auth: AuthService,
-    public loadingController: LoadingController
+    public loadingController: LoadingController,
+    public modalController: ModalController
   ) {
     this.checkoutForm = this.formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -117,6 +117,23 @@ export class LoginComponent implements OnInit {
         console.log('error', value);
       }
     });
+  }
+
+  /**
+   * [presentModal description]
+   */
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: AuthUsersModalComponent
+    });
+    await modal.present();
+    const event = await modal.onWillDismiss();
+    // console.log(event);
+    const data: IModalEvent = event.data;
+    console.log(data);
+    if (!data.cancelled) {
+      this.setUser(data.user_index);
+    }
   }
 
   /**

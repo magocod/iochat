@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 // auth
-import { LoginComponent, AuthGuard } from 'src/app/auth';
+import { AuthLoginComponent, AuthGuard } from 'src/app/auth';
 
 // core
 import { CoreLayoutComponent } from 'src/app/core';
 
 const routes: Routes = [
   {
-    path: '', component: LoginComponent,
+    path: '', component: AuthLoginComponent,
     data: {
       roles: [0],
       permissions: [0]
