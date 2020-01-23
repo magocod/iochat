@@ -114,4 +114,11 @@ export class AuthService {
     return false;
   }
 
+  /**
+   * [getUser description]
+   */
+  getUser(): any {
+    return {};
+  }
+
 }

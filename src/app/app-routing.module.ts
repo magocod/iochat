@@ -2,7 +2,11 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 // auth
-import { AuthLoginComponent, AuthGuard } from 'src/app/auth';
+import {
+  AuthLoginComponent,
+  AuthProfileComponent,
+  AuthGuard
+} from 'src/app/auth';
 
 // core
 import {
@@ -19,6 +23,13 @@ const routes: Routes = [
     },
   },
   {
+    path: 'login', component: AuthLoginComponent,
+    data: {
+      roles: [0],
+      permissions: [0]
+    },
+  },
+  {
     path: 'app', component: CoreLayoutComponent,
     canActivateChild: [AuthGuard],
     data: {
@@ -26,6 +37,14 @@ const routes: Routes = [
       permissions: [0]
     },
     children: [
+      {
+        path: 'profile',
+        component: AuthProfileComponent,
+        data: {
+          roles: [0],
+          permissions: [0]
+        },
+      },
       {
         path: 'photo',
         loadChildren: () => import('./photo/photo.module').then(m => m.PhotoModule),

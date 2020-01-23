@@ -46,7 +46,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   }
 
   checkLogin(url: string, next: ActivatedRouteSnapshot): boolean {
-    return true;
+    // return true;
     // console.log(next.data);
     const routedata = next.data as routeData;
 

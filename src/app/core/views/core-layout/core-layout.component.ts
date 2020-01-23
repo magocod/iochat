@@ -32,6 +32,11 @@ export class CoreLayoutComponent {
       title: 'Users',
       url: '/app/users',
       icon: 'people'
+    },
+    {
+      title: 'Profile',
+      url: '/app/profile',
+      icon: 'settings'
     }
   ];
 

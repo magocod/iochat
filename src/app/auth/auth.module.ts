@@ -12,6 +12,7 @@ import { AuthInterceptor } from './services';
 
 import {
   AuthLoginComponent,
+  AuthProfileComponent
 } from './views';
 
 import {
@@ -21,7 +22,8 @@ import {
 @NgModule({
   declarations: [
   	AuthLoginComponent,
-    AuthUsersModalComponent
+    AuthUsersModalComponent,
+    AuthProfileComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import {
     IonicModule
   ],
   exports: [
-  	AuthLoginComponent
+  	AuthLoginComponent,
+    AuthProfileComponent
   ],
   entryComponents: [
     AuthUsersModalComponent
