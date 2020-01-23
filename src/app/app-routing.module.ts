@@ -5,7 +5,10 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthLoginComponent, AuthGuard } from 'src/app/auth';
 
 // core
-import { CoreLayoutComponent } from 'src/app/core';
+import {
+  CoreLayoutComponent,
+  PageNotFoundComponent
+} from 'src/app/core';
 
 const routes: Routes = [
   {
@@ -56,7 +59,8 @@ const routes: Routes = [
         },
       }
     ],
-  }
+  },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

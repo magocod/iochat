@@ -2,14 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 
-import { CoreLayoutComponent } from './views';
+import {
+  CoreLayoutComponent,
+  PageNotFoundComponent
+} from './views';
 import { CoreHeaderComponent } from './components';
 
 
 @NgModule({
   declarations: [
     CoreLayoutComponent,
-    CoreHeaderComponent
+    CoreHeaderComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     CommonModule,
@@ -17,7 +21,8 @@ import { CoreHeaderComponent } from './components';
   ],
   exports: [
     CoreLayoutComponent,
-    CoreHeaderComponent
+    CoreHeaderComponent,
+    PageNotFoundComponent
   ]
 })
 export class CoreModule {}

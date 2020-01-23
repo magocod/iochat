@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { AuthProfileModalComponent } from './auth-profile-modal.component';
+import { PageNotFoundComponent } from './page-not-found.component';
 
-describe('AuthProfileModalComponent', () => {
-  let component: AuthProfileModalComponent;
-  let fixture: ComponentFixture<AuthProfileModalComponent>;
+describe('PageNotFoundComponent', () => {
+  let component: PageNotFoundComponent;
+  let fixture: ComponentFixture<PageNotFoundComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AuthProfileModalComponent ],
+      declarations: [ PageNotFoundComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AuthProfileModalComponent);
+    fixture = TestBed.createComponent(PageNotFoundComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
