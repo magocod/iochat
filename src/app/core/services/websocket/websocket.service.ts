@@ -6,7 +6,7 @@ import {
   SocketStates
 } from './utils';
 
-import { AuthService } from 'src/app/user/services';
+import { AuthService } from 'src/app/auth';
 
 @Injectable({
   providedIn: 'root'

@@ -2,8 +2,6 @@
  * Django auth
  */
 
-import { IDjangoUser } from '../user/interfaces';
-
 /**
  *
  */
@@ -15,9 +13,9 @@ export interface ICredentials {
 /**
  *
  */
-export interface IDJTokenResponse {
+export interface IDJTokenResponse<T> {
   token: string;
-  user: IDjangoUser;
+  user: T;
 }
 
 /**

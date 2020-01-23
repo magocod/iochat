@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 // auth
-import { LoginComponent, AuthGuard } from 'src/app/user';
+import { LoginComponent, AuthGuard } from 'src/app/auth';
 
 // core
 import { CoreLayoutComponent } from 'src/app/core';

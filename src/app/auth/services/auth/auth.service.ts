@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 import { DjChatHttpOptions, handleError, notifyError } from 'src/app/http-config';
 
 import { ICredentials, IDJTokenResponse } from './interfaces';
-
+import { IDjangoUser } from 'src/app/user';
 
 @Injectable({
   providedIn: 'root'
@@ -32,8 +32,8 @@ export class AuthService {
   /**
    * [login description]
    */
-  login(credentials: ICredentials): Observable<IDJTokenResponse> {
-    return this.http.post<IDJTokenResponse>(
+  login(credentials: ICredentials): Observable<IDJTokenResponse<IDjangoUser>> {
+    return this.http.post<IDJTokenResponse<IDjangoUser>>(
       `${this.apiURL}/token-auth/`,
       credentials,
       this.httpOptions
@@ -60,7 +60,7 @@ export class AuthService {
   /**
    * [setToken description]
    */
-  setToken(payload: IDJTokenResponse): void {
+  setToken(payload: IDJTokenResponse<IDjangoUser>): void {
     this.token = payload.token;
     localStorage.setItem('token', payload.token);
     localStorage.setItem('user', JSON.stringify(payload.user));

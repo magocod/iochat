@@ -15,7 +15,8 @@ import {
   AuthService,
   ICredentials,
   IDJTokenResponse
-} from 'src/app/user/services';
+} from '../../services';
+import { IDjangoUser } from 'src/app/user';
 
 import { LoadingController } from '@ionic/angular';
 
@@ -106,7 +107,7 @@ export class LoginComponent implements OnInit {
       })
     )
 
-    $loading.subscribe((value: IDJTokenResponse) => {
+    $loading.subscribe((value: IDJTokenResponse<IDjangoUser>) => {
       if (typeof value !== 'string') {
         console.log('success', value);
         this.auth.setToken(value);

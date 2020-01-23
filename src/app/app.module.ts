@@ -14,7 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 // local modules
 import { CoreModule } from 'src/app/core';
-import { UserModule } from 'src/app/user';
+import { AuthModule } from 'src/app/auth';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +26,7 @@ import { UserModule } from 'src/app/user';
     IonicModule.forRoot(),
     AppRoutingModule,
     CoreModule,
-    UserModule
+    AuthModule
   ],
   providers: [
     StatusBar,
