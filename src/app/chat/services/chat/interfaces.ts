@@ -7,7 +7,7 @@ import { TypeRoomMethods, TypeMessageMethods } from './utils';
 /**
  *
  */
-export interface IChatRoom {
+export interface ChatRoom {
   id: number;
   name: string;
   updated: string;
@@ -17,21 +17,21 @@ export interface IChatRoom {
 /**
  *
  */
-export interface IChatRoomCreate {
+export interface ChatRoomCreate {
   name: string;
 }
 
 /**
  *
  */
-export interface IDeleteMultipleRoom {
+export interface DeleteMultipleRoom {
   pk_list: number[];
 }
 
 /**
  *
  */
-export interface IChatMessage {
+export interface ChatMessage {
   id: number;
   text: string;
   updated: string;
@@ -42,7 +42,7 @@ export interface IChatMessage {
 /**
  *
  */
-export interface IChatMessageCreate {
+export interface ChatMessageCreate {
   text: string;
   room_id: number;
 }
@@ -50,29 +50,29 @@ export interface IChatMessageCreate {
 /**
  *
  */
-export interface IChatMessageDelete {
+export interface ChatMessageDelete {
   message_id: number;
 }
 
 /**
  *
  */
-export interface IRequestChat {
+export interface RequestChat {
   token: string;
 }
 
 /**
  *
  */
-export interface IRequestRoom extends IRequestChat {
+export interface RequestRoom extends RequestChat {
   method: TypeRoomMethods;
-  values: IChatRoomCreate | IDeleteMultipleRoom;
+  values: ChatRoomCreate | DeleteMultipleRoom;
 }
 
 /**
  *
  */
-export interface IRequestMessage extends IRequestChat {
+export interface RequestMessage extends RequestChat {
   method: TypeMessageMethods;
-  values: IChatMessageCreate | IChatMessageDelete;
+  values: ChatMessageCreate | ChatMessageDelete;
 }

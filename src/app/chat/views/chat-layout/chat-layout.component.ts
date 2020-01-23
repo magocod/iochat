@@ -5,7 +5,6 @@ import {
   ChatwebsocketService,
   RoomwebsocketService,
 } from 'src/app/chat/services';
-import { IDjangoUser } from 'src/app/user/services';
 
 
 @Component({

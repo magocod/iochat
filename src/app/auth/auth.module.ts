@@ -21,7 +21,7 @@ import {
 
 @NgModule({
   declarations: [
-  	AuthLoginComponent,
+    AuthLoginComponent,
     AuthUsersModalComponent,
     AuthProfileComponent
   ],
@@ -32,7 +32,7 @@ import {
     IonicModule
   ],
   exports: [
-  	AuthLoginComponent,
+    AuthLoginComponent,
     AuthProfileComponent
   ],
   entryComponents: [

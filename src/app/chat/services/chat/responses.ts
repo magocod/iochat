@@ -2,41 +2,41 @@
  * Chat websockets response
  */
 
-import { IChatRoom, IChatMessage } from './interfaces';
+import { ChatRoom, ChatMessage } from './interfaces';
 import { TypeChatMethods } from './utils';
 
 /**
  *
  */
-export interface ISocketResponse {
+export interface SocketResponse {
   method: TypeChatMethods;
 }
 
 /**
  *
  */
-export interface IChatSocketResponse<T> extends ISocketResponse {
+export interface ChatSocketResponse<T> extends SocketResponse {
   data: T;
 }
 
 /**
  *
  */
-export interface ISocketExceptionResponse {
+export interface SocketExceptionResponse {
   exception: string;
 }
 
 /**
  *
  */
-export interface ISocketErrorResponse {
-  errors: any[] | ISocketExceptionResponse;
+export interface SocketErrorResponse {
+  errors: any[] | SocketExceptionResponse;
 }
 
 /**
  *
  */
-export interface IJoinRoomResponse {
+export interface JoinRoomResponse {
   join: number;
   name: string;
 }
@@ -44,7 +44,7 @@ export interface IJoinRoomResponse {
 /**
  *
  */
-export interface IMessageGroupResponse {
+export interface MessageGroupResponse {
   room: number;
   username: string;
 }
@@ -52,14 +52,14 @@ export interface IMessageGroupResponse {
 /**
  *
  */
-export interface ILeaveRoomResponse {
+export interface LeaveRoomResponse {
   leave: number;
 }
 
 /**
  *
  */
-export interface IDeleteRoomsResponse {
+export interface DeleteRoomsResponse {
   count: number;
   pk_list: number[];
 }

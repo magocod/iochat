@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable, fromEvent } from 'rxjs';
 
 import {
-  IChatRoom,
-  IRequestRoom,
-  IDeleteMultipleRoom,
-  IChatSocketResponse,
-  IDeleteRoomsResponse,
-  ISocketErrorResponse
+  ChatRoom,
+  RequestRoom,
+  DeleteMultipleRoom,
+  ChatSocketResponse,
+  DeleteRoomsResponse,
+  SocketErrorResponse
 } from '../chat';
 
 import {
@@ -19,8 +19,8 @@ import { environment } from 'src/environments/environment';
 
 
 
-type RoomSocketResponse = IChatSocketResponse<
-  IChatRoom | IChatRoom[]  | ISocketErrorResponse | IDeleteRoomsResponse
+type RoomSocketResponse = ChatSocketResponse<
+  ChatRoom | ChatRoom[]  | SocketErrorResponse | DeleteRoomsResponse
 >;
 
 @Injectable({
@@ -29,7 +29,7 @@ type RoomSocketResponse = IChatSocketResponse<
 export class RoomwebsocketService extends WebsocketService {
 
   wsUrl = `${environment.chatws}/rooms/`;
-  rooms: IChatRoom[] = [];
+  rooms: ChatRoom[] = [];
 
   /**
    * [connect description]
@@ -63,7 +63,7 @@ export class RoomwebsocketService extends WebsocketService {
    */
   requestRooms(): void {
     if (this.isConnected()) {
-      const request: IRequestRoom = {
+      const request: RequestRoom = {
         method: 'R',
         token: this.auth.getAuthorizationToken(),
         values: { name: '-' }
@@ -82,7 +82,7 @@ export class RoomwebsocketService extends WebsocketService {
   requestRamdomCreate(): void {
     if (this.isConnected()) {
       const id = Math.floor(Math.random() * 1000000);
-      const request: IRequestRoom = {
+      const request: RequestRoom = {
         method: 'U',
         token: this.auth.getAuthorizationToken(),
         values: { name: `name_${id.toString()}` }
@@ -100,7 +100,7 @@ export class RoomwebsocketService extends WebsocketService {
    */
   requestCreate(roomName: string): void {
     if (this.isConnected()) {
-      const request: IRequestRoom = {
+      const request: RequestRoom = {
         method: 'U',
         token: this.auth.getAuthorizationToken(),
         values: { name: roomName }
@@ -118,7 +118,7 @@ export class RoomwebsocketService extends WebsocketService {
    */
   deleteRooms(arrIds: number[]): void {
     if (this.isConnected()) {
-      const request: IRequestRoom = {
+      const request: RequestRoom = {
         method: 'D',
         token: this.auth.getAuthorizationToken(),
         values: { pk_list: arrIds }
@@ -134,7 +134,7 @@ export class RoomwebsocketService extends WebsocketService {
   /**
    * [getRooms description]
    */
-  getRooms(): IChatRoom[] {
+  getRooms(): ChatRoom[] {
     return this.rooms;
   }
 
@@ -145,12 +145,12 @@ export class RoomwebsocketService extends WebsocketService {
     switch (response.method) {
 
       case 'R':
-        this.rooms = response.data as IChatRoom[];
+        this.rooms = response.data as ChatRoom[];
         break;
 
       case 'U':
-        const value = response.data as IChatRoom;
-        const exist = this.rooms.map((room: IChatRoom) => {
+        const value = response.data as ChatRoom;
+        const exist = this.rooms.map((room: ChatRoom) => {
           return room.id;
         }).includes(value.id);
 
@@ -163,8 +163,8 @@ export class RoomwebsocketService extends WebsocketService {
         break;
 
       case 'D':
-        const result = response.data as IDeleteRoomsResponse;
-        this.rooms = this.rooms.filter((room: IChatRoom) => {
+        const result = response.data as DeleteRoomsResponse;
+        this.rooms = this.rooms.filter((room: ChatRoom) => {
           if (result.pk_list.includes(room.id) === false) {
             return room;
           }

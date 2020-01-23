@@ -13,14 +13,14 @@ import {
 
 import {
   AuthService,
-  ICredentials,
-  IDJTokenResponse
+  Credentials,
+  DJTokenResponse
 } from '../../services';
-import { IDjangoUser } from 'src/app/user';
+import { DjangoUser } from 'src/app/user';
 
 import { LoadingController, ModalController } from '@ionic/angular';
 
-import { AuthUsersModalComponent, IModalEvent } from '../../components/auth-users-modal';
+import { AuthUsersModalComponent, ModalEvent } from '../../components/auth-users-modal';
 
 @Component({
   selector: 'app-auth-login',
@@ -29,7 +29,7 @@ import { AuthUsersModalComponent, IModalEvent } from '../../components/auth-user
 })
 export class AuthLoginComponent implements OnInit {
 
-  exampleusers: ICredentials[] = [
+  exampleusers: Credentials[] = [
     { email: 'admin@django.com', password: '123' },
     { email: 'userstaff@django.com', password: '123' },
     { email: 'user@django.com', password: '123' },
@@ -105,9 +105,9 @@ export class AuthLoginComponent implements OnInit {
       finalize(() => {
         loading.dismiss();
       })
-    )
+    );
 
-    $loading.subscribe((value: IDJTokenResponse<IDjangoUser>) => {
+    $loading.subscribe((value: DJTokenResponse<DjangoUser>) => {
       if (typeof value !== 'string') {
         console.log('success', value);
         this.auth.setToken(value);
@@ -129,7 +129,7 @@ export class AuthLoginComponent implements OnInit {
     await modal.present();
     const event = await modal.onWillDismiss();
     // console.log(event);
-    const data: IModalEvent = event.data;
+    const data: ModalEvent = event.data;
     console.log(data);
     if (!data.cancelled) {
       this.setUser(data.user_index);

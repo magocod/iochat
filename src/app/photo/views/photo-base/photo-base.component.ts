@@ -9,7 +9,7 @@ import { PhotoService } from '../../services';
 })
 export class PhotoBaseComponent implements OnInit {
 
-	title = 'Photo Gallery';
+  title = 'Photo Gallery';
 
   constructor(
     public photoService: PhotoService

@@ -9,7 +9,7 @@ import {
 
 import { Router } from '@angular/router';
 
-import { UserService, IDjangoUserADD, IDjangoUser } from 'src/app/user/services';
+import { UserService, DjangoUserADD, DjangoUser } from 'src/app/user/services';
 
 export interface TypeUser {
   value: boolean;
@@ -100,7 +100,7 @@ export class UserCreateComponent implements OnInit {
     console.log(this.createForm.value);
     this.userservice.createUser(
       this.createForm.value
-    ).subscribe((value: IDjangoUser) => {
+    ).subscribe((value: DjangoUser) => {
       console.log(value);
       this.userservice.addUser(value);
       this.createForm.reset();

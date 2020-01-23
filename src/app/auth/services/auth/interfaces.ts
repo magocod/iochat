@@ -5,7 +5,7 @@
 /**
  *
  */
-export interface ICredentials {
+export interface Credentials {
   email: string;
   password: string;
 }
@@ -13,7 +13,7 @@ export interface ICredentials {
 /**
  *
  */
-export interface IDJTokenResponse<T> {
+export interface DJTokenResponse<T> {
   token: string;
   user: T;
 }
@@ -21,6 +21,6 @@ export interface IDJTokenResponse<T> {
 /**
  * Requerido en todo mensaje enviado por websocket
  */
-export interface IWsAuth {
+export interface WsAuth {
   token: string;
 }

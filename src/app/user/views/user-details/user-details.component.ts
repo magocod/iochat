@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 
 import { AlertController } from '@ionic/angular';
 
-import { UserService, IDjangoUser } from 'src/app/user/services';
+import { UserService, DjangoUser } from 'src/app/user/services';
 
 @Component({
   selector: 'app-user-details',
@@ -12,7 +12,7 @@ import { UserService, IDjangoUser } from 'src/app/user/services';
 })
 export class UserDetailsComponent implements OnInit {
 
-  userDetails: IDjangoUser = {
+  userDetails: DjangoUser = {
     id: 0,
     username: '...',
     is_superuser: false,
@@ -37,7 +37,7 @@ export class UserDetailsComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.userservice.getUser(
         parseInt(params.get('userId'), 10)
-      ).subscribe((value: IDjangoUser) => {
+      ).subscribe((value: DjangoUser) => {
         console.log(value);
         this.userDetails = value;
       });

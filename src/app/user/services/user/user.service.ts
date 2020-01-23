@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { DjChatHttpOptions, handleError, notifyError } from 'src/app/http-config';
 
-import { IDjangoUserADD, IDjangoUser } from './interfaces';
+import { DjangoUserADD, DjangoUser } from './interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class UserService {
 
   apiURL = environment.chatapiurl;
   httpOptions = DjChatHttpOptions;
-  users: IDjangoUser[] = [];
+  users: DjangoUser[] = [];
 
   constructor(
     private http: HttpClient,
@@ -29,14 +29,14 @@ export class UserService {
    * [getUsers description]
    */
   public getUsers() {
-    const $request = this.http.get<IDjangoUser[]>(
+    const $request = this.http.get<DjangoUser[]>(
       `${this.apiURL}/users/`,
       this.httpOptions
     ).pipe(
       catchError(handleError),
       notifyError()
     );
-    $request.subscribe((values: IDjangoUser[]) => {
+    $request.subscribe((values: DjangoUser[]) => {
       this.users = values;
     });
   }
@@ -44,15 +44,15 @@ export class UserService {
   /**
    * [listUser description]
    */
-  public listUser(): IDjangoUser[] {
+  public listUser(): DjangoUser[] {
     return this.users;
   }
 
   /**
    * [getUser description]
    */
-  public getUser(id: number): Observable<IDjangoUser> {
-    return this.http.get<IDjangoUser>(
+  public getUser(id: number): Observable<DjangoUser> {
+    return this.http.get<DjangoUser>(
       `${this.apiURL}/user/${id.toString()}/`,
       this.httpOptions
     ).pipe(
@@ -64,8 +64,8 @@ export class UserService {
   /**
    * [createUser description]
    */
-  public createUser(userdata: IDjangoUserADD): Observable<IDjangoUser> {
-    return this.http.post<IDjangoUser>(
+  public createUser(userdata: DjangoUserADD): Observable<DjangoUser> {
+    return this.http.post<DjangoUser>(
       `${this.apiURL}/users/`,
       userdata,
       this.httpOptions
@@ -78,8 +78,8 @@ export class UserService {
   /**
    * [addUser description]
    */
-  public addUser(value: IDjangoUser): void {
-    const exist = this.users.map((user: IDjangoUser) => {
+  public addUser(value: DjangoUser): void {
+    const exist = this.users.map((user: DjangoUser) => {
       return user.id;
     }).includes(value.id);
 
@@ -93,8 +93,8 @@ export class UserService {
   /**
    * [updateUser description]
    */
-  public updateUser(userdata: IDjangoUserADD, id: number): Observable<IDjangoUser> {
-    return this.http.put<IDjangoUser>(
+  public updateUser(userdata: DjangoUserADD, id: number): Observable<DjangoUser> {
+    return this.http.put<DjangoUser>(
       `${this.apiURL}/user/${id.toString()}/`,
       userdata,
       this.httpOptions
@@ -110,7 +110,7 @@ export class UserService {
   public deleteUser(id: number): Observable<any> {
     return this.http.delete(
       `${this.apiURL}/user/${id.toString()}/`
-    ).pipe( 
+    ).pipe(
       catchError(handleError),
       notifyError()
     );
@@ -120,7 +120,7 @@ export class UserService {
    * [removeUser description]
    */
   public removeUser(id: number): void {
-    this.users = this.users.filter((user: IDjangoUser) => {
+    this.users = this.users.filter((user: DjangoUser) => {
       if (user.id !== id) {
         return user;
       }

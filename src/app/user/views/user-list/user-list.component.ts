@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
-import { UserService, IDjangoUser } from 'src/app/user/services';
+import { UserService, DjangoUser } from 'src/app/user/services';
 
 @Component({
   selector: 'app-user-list',
@@ -43,7 +43,7 @@ export class UserListComponent implements OnInit {
   /**
    * [dataSource description]
    */
-  get dataSource() {
+  get dataSource(): DjangoUser[] {
     return this.userservice.listUser();
   }
 

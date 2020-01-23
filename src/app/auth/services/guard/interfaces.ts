@@ -5,7 +5,7 @@
 /**
  * Auth routes data
  */
-export interface IAuthRoute {
-	roles: number[];
-	permissions: number[];
+export interface AuthRoute {
+  roles: number[];
+  permissions: number[];
 }

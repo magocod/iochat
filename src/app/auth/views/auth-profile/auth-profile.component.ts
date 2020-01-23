@@ -18,7 +18,7 @@ import {
 export class AuthProfileComponent implements OnInit {
 
   constructor(
-  	private auth: AuthService,
+    private auth: AuthService,
     private router: Router,
     public loadingController: LoadingController
   ) { }
@@ -39,7 +39,7 @@ export class AuthProfileComponent implements OnInit {
       finalize(() => {
         loading.dismiss();
       })
-    )
+    );
     $loading.subscribe((value) => {
       if (typeof value !== 'string') {
         console.log(value);

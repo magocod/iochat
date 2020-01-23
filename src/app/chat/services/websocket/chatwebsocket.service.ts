@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { fromEvent } from 'rxjs';
 
 import {
-  IChatMessage,
-  IRequestMessage,
-  IChatSocketResponse,
-  ISocketErrorResponse
+  ChatMessage,
+  RequestMessage,
+  ChatSocketResponse,
+  SocketErrorResponse
 } from '../chat';
 
 import {
@@ -15,8 +15,8 @@ import {
 
 import { environment } from 'src/environments/environment';
 
-type MeesageSocketResponse = IChatSocketResponse<
-  IChatMessage | IChatMessage[]  | ISocketErrorResponse
+type MeesageSocketResponse = ChatSocketResponse<
+  ChatMessage | ChatMessage[]  | SocketErrorResponse
 >;
 
 @Injectable({
@@ -25,7 +25,7 @@ type MeesageSocketResponse = IChatSocketResponse<
 export class ChatwebsocketService extends WebsocketService {
 
   wsUrl = `${environment.chatws}/chat/`;
-  messages: IChatMessage[] = [];
+  messages: ChatMessage[] = [];
 
   /**
    * [connect description]
@@ -59,7 +59,7 @@ export class ChatwebsocketService extends WebsocketService {
    */
   requestMessages(roomId: number): void {
     if (this.isConnected()) {
-      const request: IRequestMessage = {
+      const request: RequestMessage = {
         method: 'R',
         token: this.auth.getAuthorizationToken(),
         values: { text: '-', room_id: roomId }
@@ -77,7 +77,7 @@ export class ChatwebsocketService extends WebsocketService {
    */
   createMessage(messageText: string, roomId: number): void {
     if (this.isConnected()) {
-      const request: IRequestMessage = {
+      const request: RequestMessage = {
         method: 'C',
         token: this.auth.getAuthorizationToken(),
         values: { text: messageText, room_id: roomId }
@@ -92,7 +92,7 @@ export class ChatwebsocketService extends WebsocketService {
 
   deleteMessage(messageId: number): void {
     if (this.isConnected()) {
-      const request: IRequestMessage = {
+      const request: RequestMessage = {
         method: 'D',
         token: this.auth.getAuthorizationToken(),
         values: { message_id: messageId }
@@ -108,13 +108,13 @@ export class ChatwebsocketService extends WebsocketService {
   /**
    * [getMessages description]
    */
-  getMessages(): IChatMessage[] {
+  getMessages(): ChatMessage[] {
     return this.messages;
   }
 
   joinRoom(roomId: number): void {
     if (this.isConnected()) {
-      const request: IRequestMessage = {
+      const request: RequestMessage = {
         method: 'J',
         token: this.auth.getAuthorizationToken(),
         values: { text: '', room_id: roomId }
@@ -134,12 +134,12 @@ export class ChatwebsocketService extends WebsocketService {
     switch (response.method) {
 
       case 'R':
-        this.messages = response.data as IChatMessage[];
+        this.messages = response.data as ChatMessage[];
         break;
 
       case 'C':
-        const value = response.data as IChatMessage;
-        const exist = this.messages.map((room: IChatMessage) => {
+        const value = response.data as ChatMessage;
+        const exist = this.messages.map((room: ChatMessage) => {
           return room.id;
         }).includes(value.id);
 
@@ -152,8 +152,8 @@ export class ChatwebsocketService extends WebsocketService {
         break;
 
       case 'D':
-        const result = response.data as IChatMessage;
-        this.messages = this.messages.filter((room: IChatMessage) => {
+        const result = response.data as ChatMessage;
+        this.messages = this.messages.filter((room: ChatMessage) => {
           if (room.id !== result.id) {
             return room;
           }

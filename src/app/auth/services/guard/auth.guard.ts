@@ -10,13 +10,13 @@ import {
 import { Observable } from 'rxjs';
 
 import { AuthService } from '../auth';
-import { IAuthRoute } from './interfaces';
+import { AuthRoute } from './interfaces';
 
 /**
  * [routeData description]
- * Note: IAuthRoute + ...others 
+ * Note: IAuthRoute + ...others
  */
-export type routeData = IAuthRoute;
+export type routeData = AuthRoute;
 
 @Injectable({
   providedIn: 'root'

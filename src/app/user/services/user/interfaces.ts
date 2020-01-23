@@ -5,7 +5,7 @@
 /**
  *
  */
-export interface IDjangoUser {
+export interface DjangoUser {
   id: number;
   username: string;
   is_superuser: boolean;
@@ -20,7 +20,7 @@ export interface IDjangoUser {
 /**
  *
  */
-export interface IDjangoUserADD {
+export interface DjangoUserADD {
   username: string;
   email: string;
   first_name: string;

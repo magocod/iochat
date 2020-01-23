@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import {
   ChatwebsocketService,
   RoomwebsocketService,
-  IChatRoom,
-  IChatMessage,
-  IChatSocketResponse,
+  ChatRoom,
+  ChatMessage,
+  ChatSocketResponse,
 } from 'src/app/chat/services';
 
 @Component({
@@ -56,7 +56,7 @@ export class ChatDashboardComponent implements OnInit {
   /**
    * [rooms description]
    */
-  get rooms(): IChatRoom[] {
+  get rooms(): ChatRoom[] {
     // console.log(this.roomwebsocketservice.getRooms());
     return this.roomwebsocketservice.getRooms();
   }
@@ -64,7 +64,7 @@ export class ChatDashboardComponent implements OnInit {
   /**
    * [messages description]
    */
-  get messages(): IChatMessage[] {
+  get messages(): ChatMessage[] {
     // console.log(this.roomwebsocketservice.getRooms());
     return this.chatwebsocketservice.getMessages();
   }

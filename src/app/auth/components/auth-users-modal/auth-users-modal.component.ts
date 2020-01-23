@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 
 import { NavParams, ModalController } from '@ionic/angular';
 
-import { ICredentials } from '../../services';
+import { Credentials } from '../../services';
 
 /**
  *
  */
-export interface IModalEvent {
+export interface ModalEvent {
   cancelled: boolean;
   user_index: number;
 }
@@ -19,7 +19,7 @@ export interface IModalEvent {
 })
 export class AuthUsersModalComponent implements OnInit {
 
-  exampleusers: ICredentials[] = [
+  exampleusers: Credentials[] = [
     { email: 'admin@django.com', password: '123' },
     { email: 'userstaff@django.com', password: '123' },
     { email: 'user@django.com', password: '123' },
@@ -39,7 +39,7 @@ export class AuthUsersModalComponent implements OnInit {
     this.modalController.dismiss({
       cancelled: false,
       user_index: index
-    } as IModalEvent);
+    } as ModalEvent);
   }
 
   /**
@@ -51,7 +51,7 @@ export class AuthUsersModalComponent implements OnInit {
     this.modalController.dismiss({
       cancelled: true,
       user_index: 0
-    } as IModalEvent);
+    } as ModalEvent);
   }
 
 }
