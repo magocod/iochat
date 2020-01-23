@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
+import { ToastController } from '@ionic/angular';
+
 import { environment } from 'src/environments/environment';
 import { DjChatHttpOptions, handleError, notifyError } from 'src/app/http-config';
 
@@ -27,6 +29,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
+    public toast: ToastController
   ) { }
 
   /**
@@ -39,7 +42,7 @@ export class AuthService {
       this.httpOptions
     ).pipe(
       catchError(handleError),
-      notifyError()
+      notifyError(this.toast)
     );
   }
 
@@ -53,7 +56,7 @@ export class AuthService {
       this.httpOptions
     ).pipe(
       catchError(handleError),
-      notifyError()
+      notifyError(this.toast)
     );
   }
 

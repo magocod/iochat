@@ -7,8 +7,13 @@ import { catchError, finalize } from 'rxjs/operators';
 import { LoadingController } from '@ionic/angular';
 
 import {
+  ChatwebsocketService,
+  RoomwebsocketService,
+} from 'src/app/chat/services';
+
+import {
   AuthService
-} from '../../services';
+} from 'src/app/auth';
 
 @Component({
   selector: 'app-auth-profile',
@@ -17,10 +22,15 @@ import {
 })
 export class AuthProfileComponent implements OnInit {
 
+  // roomsocket = true;
+  // chatsocket = true;
+
   constructor(
     private auth: AuthService,
     private router: Router,
-    public loadingController: LoadingController
+    public loadingController: LoadingController,
+    private chatwebsocketservice: ChatwebsocketService,
+    private roomwebsocketservice: RoomwebsocketService
   ) { }
 
   ngOnInit() {}
@@ -49,6 +59,36 @@ export class AuthProfileComponent implements OnInit {
         console.log('error', value);
       }
     });
+  }
+
+  get roomsocket(): boolean {
+    return this.roomwebsocketservice.connectionStatus();
+  }
+
+  get chatsocket(): boolean {
+    return this.chatwebsocketservice.connectionStatus();
+  }
+
+  /**
+   * [connectChatSocket description]
+   */
+  connectChatSocket(): void {
+    if (!this.chatwebsocketservice.connectionStatus()) {
+      this.chatwebsocketservice.connect();
+    } else {
+      console.log('socket chat active');
+    }
+  }
+
+  /**
+   * [connectRoomSocket description]
+   */
+  connectRoomSocket(): void {
+    if (!this.roomwebsocketservice.connectionStatus()) {
+      this.roomwebsocketservice.connect();
+    } else {
+      console.log('socket room active');
+    }
   }
 
 }

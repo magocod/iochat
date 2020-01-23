@@ -25,13 +25,15 @@ export const AuthInterceptorExclude: string[] = [
  * [handleError description]
  */
 export function handleError(error) {
-  let errorMessage = '';
+  console.log(error.status);
+  console.log(error.message);
+  let errorMessage = error.message;
   if (error.error instanceof ErrorEvent) {
     // Get client-side error
     errorMessage = error.error.message;
   } else {
     // Get server-side error
-    errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    // errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
   }
   // window.alert(errorMessage);
   console.log('handleerror:', errorMessage);
@@ -41,7 +43,7 @@ export function handleError(error) {
 /**
  * [notifyError description]
  */
-export function notifyError(): OperatorFunction<any, any> {
+export function notifyError(toastController: any): OperatorFunction<any, any> {
   return (observable) => new Observable((observer: Subscriber<any>) => {
     // this function will called each time this
     // Observable is subscribed to.
@@ -49,8 +51,14 @@ export function notifyError(): OperatorFunction<any, any> {
       next(value) {
         observer.next(value);
       },
-      error(err) {
+      async error(err) {
         console.log('notifyerror:', err);
+        const toast = await toastController.create({
+          message: err,
+          color: 'danger',
+          duration: 2000
+        });
+        toast.present();
         observer.error(err);
       },
       complete() {

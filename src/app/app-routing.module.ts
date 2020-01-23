@@ -4,13 +4,13 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 // auth
 import {
   AuthLoginComponent,
-  AuthProfileComponent,
   AuthGuard
 } from 'src/app/auth';
 
 // core
 import {
   CoreLayoutComponent,
+  AuthProfileComponent,
   PageNotFoundComponent
 } from 'src/app/core';
 

@@ -65,6 +65,13 @@ export class RoomDetailsComponent implements OnInit {
   }
 
   /**
+   * [deleteMessage description]
+   */
+  deleteMessage(messageId: number, index: number): void {
+    this.chatwebsocketservice.deleteMessage(messageId);
+  }
+
+  /**
    * [onSubmit description]
    */
   onSubmit(): void {

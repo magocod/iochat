@@ -11,8 +11,7 @@ import { IonicModule } from '@ionic/angular';
 import { AuthInterceptor } from './services';
 
 import {
-  AuthLoginComponent,
-  AuthProfileComponent
+  AuthLoginComponent
 } from './views';
 
 import {
@@ -22,8 +21,7 @@ import {
 @NgModule({
   declarations: [
     AuthLoginComponent,
-    AuthUsersModalComponent,
-    AuthProfileComponent
+    AuthUsersModalComponent
   ],
   imports: [
     CommonModule,
@@ -32,8 +30,7 @@ import {
     IonicModule
   ],
   exports: [
-    AuthLoginComponent,
-    AuthProfileComponent
+    AuthLoginComponent
   ],
   entryComponents: [
     AuthUsersModalComponent

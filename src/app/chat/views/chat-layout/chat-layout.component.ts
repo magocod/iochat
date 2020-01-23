@@ -21,11 +21,20 @@ export class ChatLayoutComponent implements OnInit {
     private chatwebsocketservice: ChatwebsocketService,
     private roomwebsocketservice: RoomwebsocketService
   ) {
-    this.chatwebsocketservice.connect();
-    this.roomwebsocketservice.connect();
+
   }
 
   ngOnInit() {
+    if (!this.chatwebsocketservice.isConnected()) {
+      this.chatwebsocketservice.connect();
+    } else {
+      console.log('socket chat active');
+    }
+    if (!this.roomwebsocketservice.isConnected()) {
+      this.roomwebsocketservice.connect();
+    } else {
+      console.log('socket room active');
+    }
   }
 
   get roomSocket(): boolean {

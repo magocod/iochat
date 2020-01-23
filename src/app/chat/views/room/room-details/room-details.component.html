@@ -1,1 +1,58 @@
 
+<ion-content fullscreen>
+
+	<ion-list>
+		<ion-list-header>
+	    <ion-label>...</ion-label>
+	  </ion-list-header>
+	  <ion-item *ngFor="let message of messages; index as messageIndex">
+	  	<ion-label>
+		    <h2>{{message.text}}</h2>
+		    <h3> {{message.updated | date}} </h3>
+		  </ion-label>
+	    <ion-fab-button
+        (click)="deleteMessage(message.id, messageIndex)"
+        color="danger"
+        size="small"
+        slot="end"
+      >
+        <ion-icon name="trash"></ion-icon>
+      </ion-fab-button>
+	  </ion-item>
+	</ion-list>
+
+	<form
+	  [formGroup]="createForm"
+	  (ngSubmit)="onSubmit()"
+	>
+
+		<ion-grid>
+			<ion-row>
+				<ion-col size="12">
+					<ion-item>
+					  <ion-label position="floating">New Message</ion-label>
+		        <ion-input
+		          placeholder="Text"
+		          [formControl]="text"
+		          formControlName="text"
+		          required
+		        ></ion-input>
+		      </ion-item>
+				</ion-col>
+
+				<ion-col size="12">
+		      <ion-button
+		      	expand="block"
+		        color="primary"
+		        type="submit"
+		        [disabled]="!createForm.valid"
+		      >
+		        CREATE
+		      </ion-button>
+		    </ion-col>
+	    </ion-row>
+	  </ion-grid>
+
+	</form>
+
+</ion-content>

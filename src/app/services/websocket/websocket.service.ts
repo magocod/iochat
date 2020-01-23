@@ -6,23 +6,17 @@ import {
   SocketStates
 } from './utils';
 
-import { AuthService } from 'src/app/auth';
-
 @Injectable({
   providedIn: 'root'
 })
-export class WebsocketService {
+export abstract class WebsocketService {
 
   instance: WebSocket;
   wsUrl: string;
 
   observablemessage: Observable<Event>;
 
-  constructor(
-    public auth: AuthService,
-  ) {
-
-  }
+  constructor() { }
 
   /**
    * [close description]
@@ -39,6 +33,23 @@ export class WebsocketService {
       return false;
     }
     if (this.instance.readyState === SocketStates.OPEN) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * [isConnected description]
+   * @return {boolean} [description]
+   */
+  connectionStatus(): boolean {
+    if (this.instance === undefined) {
+      return false;
+    }
+    if (this.instance.readyState === SocketStates.OPEN) {
+      return true;
+    }
+    if (this.instance.readyState === SocketStates.CONNECTING) {
       return true;
     }
     return false;

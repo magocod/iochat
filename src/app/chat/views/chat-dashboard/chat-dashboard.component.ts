@@ -88,7 +88,7 @@ export class ChatDashboardComponent implements OnInit {
    */
   joinRoom(roomId: number): void {
     this.router.navigate([
-      '/chat/room/',
+      'app/chats/room/',
       roomId
     ]);
   }

@@ -11,7 +11,9 @@ import {
 
 import {
   WebsocketService
-} from 'src/app/core/services';
+} from 'src/app/services';
+
+import { AuthService } from 'src/app/auth';
 
 import { environment } from 'src/environments/environment';
 
@@ -26,6 +28,12 @@ export class ChatwebsocketService extends WebsocketService {
 
   wsUrl = `${environment.chatws}/chat/`;
   messages: ChatMessage[] = [];
+
+  constructor(
+    private auth: AuthService
+  ) {
+    super();
+  }
 
   /**
    * [connect description]

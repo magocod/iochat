@@ -11,9 +11,11 @@ import {
   SocketErrorResponse
 } from '../chat';
 
+import { AuthService } from 'src/app/auth';
+
 import {
   WebsocketService
-} from 'src/app/core/services';
+} from 'src/app/services';
 
 import { environment } from 'src/environments/environment';
 
@@ -30,6 +32,12 @@ export class RoomwebsocketService extends WebsocketService {
 
   wsUrl = `${environment.chatws}/rooms/`;
   rooms: ChatRoom[] = [];
+
+  constructor(
+    private auth: AuthService
+  ) {
+    super();
+  }
 
   /**
    * [connect description]

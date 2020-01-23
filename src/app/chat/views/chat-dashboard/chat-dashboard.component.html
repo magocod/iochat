@@ -21,14 +21,23 @@
       <ion-label>
         <h2>{{ room.name }}</h2>
         <h3>{{ room.updated | date }}</h3>
-        <ion-fab-button
-          (click)="deleteRoom(room.id, roomindex)"
-          color="danger"
-          size="small"
-        >
-          <ion-icon name="trash"></ion-icon>
-        </ion-fab-button>
       </ion-label>
+      <ion-fab-button
+        (click)="joinRoom(room.id)"
+        color="primary"
+        size="small"
+        slot="end"
+      >
+        <ion-icon name="paper-plane"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button
+        (click)="deleteRoom(room.id, roomindex)"
+        color="danger"
+        size="small"
+        slot="end"
+      >
+        <ion-icon name="trash"></ion-icon>
+      </ion-fab-button>
     </ion-item>
   </ion-list>
 </ion-content>

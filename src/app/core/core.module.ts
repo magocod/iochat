@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 
 import {
   CoreLayoutComponent,
+  AuthProfileComponent,
   PageNotFoundComponent
 } from './views';
 import { CoreHeaderComponent } from './components';
@@ -14,6 +15,7 @@ import { CoreHeaderComponent } from './components';
     CoreLayoutComponent,
     CoreHeaderComponent,
     PageNotFoundComponent,
+    AuthProfileComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,8 @@ import { CoreHeaderComponent } from './components';
   exports: [
     CoreLayoutComponent,
     CoreHeaderComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    AuthProfileComponent
   ]
 })
 export class CoreModule {}
