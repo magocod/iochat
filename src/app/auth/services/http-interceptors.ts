@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpInterceptor } from '@angular/common/http';
 
+import { from } from 'rxjs';
+
 import { AuthService } from './auth';
 import { AuthInterceptorExclude } from 'src/app/http-config';
 
@@ -11,6 +13,10 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private auth: AuthService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
+    return from(this.handleAuthToken(req, next));
+  }
+
+  async handleAuthToken(req: HttpRequest<any>, next: HttpHandler) {
     // Get the auth token from the service.
     console.log('origin', req);
 
@@ -21,7 +27,7 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
 
-    const authToken: string = this.auth.getAuthorizationToken();
+    const authToken = await this.auth.getAuthorizationToken();
 
     // Clone the request and replace the original headers with
     // cloned headers, updated with the authorization.
@@ -33,6 +39,7 @@ export class AuthInterceptor implements HttpInterceptor {
     console.log('clone', authReq);
 
     // send cloned request with header to the next handler.
-    return next.handle(authReq);
+    return next.handle(authReq).toPromise();
   }
+
 }

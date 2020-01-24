@@ -50,10 +50,10 @@ export class AuthProfileComponent implements OnInit {
         loading.dismiss();
       })
     );
-    $loading.subscribe((value) => {
+    $loading.subscribe(async (value) => {
       if (typeof value !== 'string') {
         console.log(value);
-        this.auth.removeToken();
+        await this.auth.removeToken();
         this.router.navigateByUrl('/');
       } else {
         console.log('error', value);

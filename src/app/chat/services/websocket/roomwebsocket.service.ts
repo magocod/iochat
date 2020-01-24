@@ -69,11 +69,11 @@ export class RoomwebsocketService extends WebsocketService {
   /**
    * [requestRooms description]
    */
-  requestRooms(): void {
+  async requestRooms() {
     if (this.isConnected()) {
       const request: RequestRoom = {
         method: 'R',
-        token: this.auth.getAuthorizationToken(),
+        token: await this.auth.getAuthorizationToken(),
         values: { name: '-' }
       };
       this.instance.send(
@@ -87,12 +87,12 @@ export class RoomwebsocketService extends WebsocketService {
   /**
    * [requestRooms description]
    */
-  requestRamdomCreate(): void {
+  async requestRamdomCreate() {
     if (this.isConnected()) {
       const id = Math.floor(Math.random() * 1000000);
       const request: RequestRoom = {
         method: 'U',
-        token: this.auth.getAuthorizationToken(),
+        token: await this.auth.getAuthorizationToken(),
         values: { name: `name_${id.toString()}` }
       };
       this.instance.send(
@@ -106,11 +106,11 @@ export class RoomwebsocketService extends WebsocketService {
   /**
    * [requestCreate description]
    */
-  requestCreate(roomName: string): void {
+  async requestCreate(roomName: string) {
     if (this.isConnected()) {
       const request: RequestRoom = {
         method: 'U',
-        token: this.auth.getAuthorizationToken(),
+        token: await this.auth.getAuthorizationToken(),
         values: { name: roomName }
       };
       this.instance.send(
@@ -124,11 +124,11 @@ export class RoomwebsocketService extends WebsocketService {
   /**
    * [requestRooms description]
    */
-  deleteRooms(arrIds: number[]): void {
+  async deleteRooms(arrIds: number[]) {
     if (this.isConnected()) {
       const request: RequestRoom = {
         method: 'D',
-        token: this.auth.getAuthorizationToken(),
+        token: await this.auth.getAuthorizationToken(),
         values: { pk_list: arrIds }
       };
       this.instance.send(

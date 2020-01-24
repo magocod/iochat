@@ -107,10 +107,10 @@ export class AuthLoginComponent implements OnInit {
       })
     );
 
-    $loading.subscribe((value: DJTokenResponse<DjangoUser>) => {
+    $loading.subscribe(async (value: DJTokenResponse<DjangoUser>) => {
       if (typeof value !== 'string') {
         console.log('success', value);
-        this.auth.setToken(value);
+        await this.auth.setToken(value);
         this.checkoutForm.reset();
         this.router.navigate(['/app/photo']);
       } else {

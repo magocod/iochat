@@ -6,6 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicStorageModule } from '@ionic/storage';
+
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
@@ -24,6 +26,7 @@ import { AuthModule } from 'src/app/auth';
     HttpClientModule,
     ReactiveFormsModule,
     IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     AppRoutingModule,
     CoreModule,
     AuthModule

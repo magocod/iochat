@@ -7,7 +7,11 @@ import {
   UrlTree,
   Router
 } from '@angular/router';
-import { Observable } from 'rxjs';
+
+import {
+  Observable,
+  // from
+} from 'rxjs';
 
 import { AuthService } from '../auth';
 import { AuthRoute } from './interfaces';
@@ -28,30 +32,34 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     private router: Router
    ) {}
 
-  canActivate(
+  async canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    // console.log('AuthGuard#canActivate called');
+    state: RouterStateSnapshot) {
     // tslint:disable-next-line
     let url: string = state.url;
 
-    return this.checkLogin(url, next);
+    const res = await this.checkLogin(url, next);
+    console.log('AuthGuard#canActivate called', res);
+    return res;
     // return true;
   }
 
-  canActivateChild(
+  async canActivateChild(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    state: RouterStateSnapshot) {
+    // return from(this.canActivate(route, state));
     return this.canActivate(route, state);
   }
 
-  checkLogin(url: string, next: ActivatedRouteSnapshot): boolean {
+  async checkLogin(url: string, next: ActivatedRouteSnapshot): Promise<boolean> {
     // return true;
     // console.log(next.data);
     const routedata = next.data as routeData;
 
+    const auth: boolean = await this.authService.isLoggedIn();
+    // console.log(auth);
     // authenticated
-    if (this.authService.isLoggedIn()) {
+    if (auth) {
       return true;
     }
 
@@ -77,6 +85,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     // Navigate to the login page with extras
     this.router.navigate(['/login']);
     return false;
+
   }
 
 }

@@ -6,6 +6,8 @@ import { catchError } from 'rxjs/operators';
 
 import { ToastController } from '@ionic/angular';
 
+import { Storage } from '@ionic/storage';
+
 import { environment } from 'src/environments/environment';
 import { DjChatHttpOptions, handleError, notifyError } from 'src/app/http-config';
 
@@ -29,6 +31,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
+    private storage: Storage,
     public toast: ToastController
   ) { }
 
@@ -63,10 +66,12 @@ export class AuthService {
   /**
    * [setToken description]
    */
-  setToken(payload: DJTokenResponse<DjangoUser>): void {
+  async setToken(payload: DJTokenResponse<DjangoUser>) {
     this.token = payload.token;
-    localStorage.setItem('token', payload.token);
-    localStorage.setItem('user', JSON.stringify(payload.user));
+    await this.storage.set('token', payload.token);
+    await this.storage.set('user', JSON.stringify(payload.user));
+    // localStorage.setItem('token', payload.token);
+    // localStorage.setItem('user', JSON.stringify(payload.user));
     // this.authorizeheaders.headers = this.authorizeheaders.headers.set(
     //  'Authorization', `Token ${tk.token}`
     // );
@@ -75,32 +80,51 @@ export class AuthService {
   /**
    * [removeToken description]
    */
-  removeToken(): void {
+  async removeToken() {
+    await this.storage.remove('token');
+    await this.storage.remove('user');
     this.token = '';
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    // localStorage.removeItem('token');
+    // localStorage.removeItem('user');
   }
 
   /**
    * [getAuthorizationToken description]
    */
-  getAuthorizationToken(): string {
+  async getAuthorizationToken() {
     if (this.token === '') {
-      if (localStorage.getItem('token') !== null) {
-        return localStorage.getItem('token');
+      // if (localStorage.getItem('token') !== null) {
+      //   return localStorage.getItem('token');
+      // }
+      const tk = await this.storage.get('token');
+      if (tk !== null) {
+        this.token = tk;
       }
     }
+    // console.log('tk', this.token);
     return this.token;
   }
 
   /**
    * [isLoggedIn description]
    */
-  isLoggedIn(): boolean {
-    if (localStorage.getItem('token') !== null) {
+  async isLoggedIn() {
+    // if (localStorage.getItem('token') !== null) {
+    //   return true;
+    // }
+    const tk = await this.storage.get('token');
+    console.log(tk);
+    if (tk !== null) {
       return true;
     }
     return false;
+  }
+
+  /**
+   * [isLoggedIn description]
+   */
+  getToken(): string {
+    return this.token; 
   }
 
   /**

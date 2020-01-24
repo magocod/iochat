@@ -65,11 +65,11 @@ export class ChatwebsocketService extends WebsocketService {
   /**
    * [requestRooms description]
    */
-  requestMessages(roomId: number): void {
+  async requestMessages(roomId: number) {
     if (this.isConnected()) {
       const request: RequestMessage = {
         method: 'R',
-        token: this.auth.getAuthorizationToken(),
+        token: await this.auth.getAuthorizationToken(),
         values: { text: '-', room_id: roomId }
       };
       this.instance.send(
@@ -83,11 +83,11 @@ export class ChatwebsocketService extends WebsocketService {
   /**
    * [createMessage description]
    */
-  createMessage(messageText: string, roomId: number): void {
+  async createMessage(messageText: string, roomId: number) {
     if (this.isConnected()) {
       const request: RequestMessage = {
         method: 'C',
-        token: this.auth.getAuthorizationToken(),
+        token: await this.auth.getAuthorizationToken(),
         values: { text: messageText, room_id: roomId }
       };
       this.instance.send(
@@ -98,11 +98,11 @@ export class ChatwebsocketService extends WebsocketService {
     }
   }
 
-  deleteMessage(messageId: number): void {
+  async deleteMessage(messageId: number) {
     if (this.isConnected()) {
       const request: RequestMessage = {
         method: 'D',
-        token: this.auth.getAuthorizationToken(),
+        token: await this.auth.getAuthorizationToken(),
         values: { message_id: messageId }
       };
       this.instance.send(
@@ -120,11 +120,11 @@ export class ChatwebsocketService extends WebsocketService {
     return this.messages;
   }
 
-  joinRoom(roomId: number): void {
+  async joinRoom(roomId: number) {
     if (this.isConnected()) {
       const request: RequestMessage = {
         method: 'J',
-        token: this.auth.getAuthorizationToken(),
+        token: await this.auth.getAuthorizationToken(),
         values: { text: '', room_id: roomId }
       };
       this.instance.send(
