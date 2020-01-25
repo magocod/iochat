@@ -40,7 +40,6 @@ export abstract class WebsocketService {
 
   /**
    * [isConnected description]
-   * @return {boolean} [description]
    */
   connectionStatus(): boolean {
     if (this.instance === undefined) {

@@ -124,28 +124,42 @@ export class AuthService {
    * [isLoggedIn description]
    */
   getToken(): string {
-    return this.token; 
+    return this.token;
   }
 
   /**
    * [userRole description]
    */
-  userRole(): boolean {
+  async userRole(): Promise<boolean> {
     return false;
   }
 
   /**
    * [userHasPermissions description]
    */
-  userHasPermissions(permissions: number[]): boolean {
+  async userHasPermissions(permissions: number[]): Promise<boolean> {
     return false;
   }
 
   /**
    * [getUser description]
    */
-  getUser(): any {
-    return {};
+  async getUser(): Promise<DjangoUser> {
+    const user = await this.storage.get('user');
+    if (user !== null) {
+      return JSON.parse(user) as DjangoUser;
+    }
+    return {
+      id: 0,
+      username: '---',
+      is_superuser: false,
+      is_staff: false,
+      email: '---@---.---',
+      first_name: '---',
+      last_name: '---',
+      date_joined: '---',
+      user_permissions: [],
+    };
   }
 
 }

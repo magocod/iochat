@@ -15,6 +15,11 @@ import {
   AuthService
 } from 'src/app/auth';
 
+import {
+  DjangoUser
+} from 'src/app/user';
+
+
 @Component({
   selector: 'app-auth-profile',
   templateUrl: './auth-profile.component.html',
@@ -24,6 +29,17 @@ export class AuthProfileComponent implements OnInit {
 
   // roomsocket = true;
   // chatsocket = true;
+  user: DjangoUser = {
+    id: 0,
+    username: '---',
+    is_superuser: false,
+    is_staff: false,
+    email: '---@---.---',
+    first_name: '---',
+    last_name: '---',
+    date_joined: '---',
+    user_permissions: [],
+  };
 
   constructor(
     private auth: AuthService,
@@ -33,7 +49,9 @@ export class AuthProfileComponent implements OnInit {
     private roomwebsocketservice: RoomwebsocketService
   ) { }
 
-  ngOnInit() {}
+  async ngOnInit() {
+    this.user = await this.auth.getUser();
+  }
 
   async logout() {
     // console.log('l');

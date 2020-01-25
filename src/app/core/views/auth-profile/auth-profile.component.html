@@ -12,35 +12,117 @@
 <ion-content>
 	<ion-list>
 		<ion-list-header>
-	    <ion-label>YOUR ACCOUNT</ion-label>
+	    <ion-label color="primary">YOUR ACCOUNT</ion-label>
 	  </ion-list-header>
 	  <ion-item>
-	    <ion-label>----</ion-label>
+	  	<ion-avatar slot="start">
+			  <ion-icon name="mail"></ion-icon>
+			</ion-avatar>
+	    <ion-label>
+	    	<h2>{{ user.email }}</h2>
+      	<h3>email</h3>
+	    </ion-label>
+	    <ion-fab-button
+        color="tertiary"
+        size="small"
+        slot="end"
+      >
+        <ion-icon name="settings"></ion-icon>
+      </ion-fab-button>
+	  </ion-item>
+	  <ion-item>
+	  	<ion-avatar slot="start">
+			  <ion-icon name="person"></ion-icon>
+			</ion-avatar>
+	    <ion-label>
+	    	<h2>{{ user.username }}</h2>
+      	<h3>username</h3>
+	    </ion-label>
+	  </ion-item>
+	  <ion-item>
+	  	<ion-avatar slot="start">
+			  <ion-icon name="phone-portrait"></ion-icon>
+			</ion-avatar>
+	    <ion-label>
+	    	<h2>(00) 00-000-000</h2>
+      	<h3>phone number</h3>
+	    </ion-label>
 	  </ion-item>
 	  <ion-list-header>
-	    <ion-label>CONNECTED</ion-label>
+	    <ion-label color="primary">CONNECTED</ion-label>
 	  </ion-list-header>
 	  <ion-item>
+	  	<ion-avatar slot="start">
+			  <ion-icon name="logo-google"></ion-icon>
+			</ion-avatar>
 	    <ion-label>GOOGLE</ion-label>
 	    <ion-toggle disabled checked="false"></ion-toggle>
 	  </ion-item>
 	  <ion-item>
+	  	<ion-avatar slot="start">
+			  <ion-icon name="logo-facebook"></ion-icon>
+			</ion-avatar>
 	    <ion-label>FACEBOOK</ion-label>
 	    <ion-toggle disabled checked="false"></ion-toggle>
 	  </ion-item>
 	  <ion-list-header>
-	    <ion-label>WEB SOCKETS</ion-label>
+	    <ion-label color="primary">WEB SOCKETS</ion-label>
 	  </ion-list-header>
 	  <ion-item (click)="connectRoomSocket()">
+	  	<ion-avatar slot="start">
+			  <ion-icon name="log-in"></ion-icon>
+			</ion-avatar>
 	    <ion-label>ROOM</ion-label>
 	    <ion-toggle [checked]="roomsocket"></ion-toggle>
 	  </ion-item>
 	  <ion-item (click)="connectChatSocket()">
+	  	<ion-avatar slot="start">
+			  <ion-icon name="log-in"></ion-icon>
+			</ion-avatar>
 	    <ion-label>CHAT</ion-label>
 	    <ion-toggle [checked]="chatsocket"></ion-toggle>
+	  </ion-item>
+	  <ion-list-header>
+	    <ion-label color="primary">SETTINGS</ion-label>
+	  </ion-list-header>
+	  <ion-item>
+	  	<ion-avatar slot="start">
+			  <ion-icon name="notifications"></ion-icon>
+			</ion-avatar>
+	    <ion-label>
+	    	<h2>Notifications</h2>
+	    </ion-label>
+	  </ion-item>
+	  <ion-item>
+	  	<ion-avatar slot="start">
+			  <ion-icon name="lock"></ion-icon>
+			</ion-avatar>
+	    <ion-label>
+	    	<h2>Privacy and Security</h2>
+	    </ion-label>
+	  </ion-item>
+	  <ion-list-header>
+	    <ion-label color="primary">IO-CHAT</ion-label>
+	  </ion-list-header>
+	  <ion-item>
+	    <ion-label>
+	    	<h2>Terms of service</h2>
+	    </ion-label>
+	  </ion-item>
+	  <ion-item>
+	    <ion-label>
+	    	<h2>Privacy policy</h2>
+	    </ion-label>
+	  </ion-item>
+	  <ion-item>
+	    <ion-label>
+	    	<h2>App version</h2>
+      	<h3>0.0.1</h3>
+	    </ion-label>
 	  </ion-item>
 	  <ion-item (click)="logout()">
 	    <ion-label color="danger">Sign off</ion-label>
 	  </ion-item>
 	</ion-list>
+
 </ion-content>
