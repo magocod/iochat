@@ -53,6 +53,16 @@
 	  </ion-list-header>
 	  <ion-item>
 	  	<ion-avatar slot="start">
+			  <ion-icon name="logo-rss"></ion-icon>
+			</ion-avatar>
+	    <ion-label>
+	    	<h2>NETWORK</h2>
+	    	<h3>{{ connectionType }}</h3>
+	    </ion-label>
+	    <ion-toggle [checked]="connectionState"></ion-toggle>
+	  </ion-item>
+	  <ion-item>
+	  	<ion-avatar slot="start">
 			  <ion-icon name="logo-google"></ion-icon>
 			</ion-avatar>
 	    <ion-label>GOOGLE</ion-label>

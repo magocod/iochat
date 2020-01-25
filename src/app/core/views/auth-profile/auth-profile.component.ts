@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 
+import { Plugins } from '@capacitor/core';
+const { Network } = Plugins;
+
 import { LoadingController } from '@ionic/angular';
 
 import {
@@ -41,6 +44,9 @@ export class AuthProfileComponent implements OnInit {
     user_permissions: [],
   };
 
+  connectionState = false;
+  connectionType = '---';
+
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -51,6 +57,19 @@ export class AuthProfileComponent implements OnInit {
 
   async ngOnInit() {
     this.user = await this.auth.getUser();
+
+    // current
+    const status = await Network.getStatus();
+    this.connectionState = status.connected;
+    this.connectionType = status.connectionType;
+
+    // listener
+    Network.addListener('networkStatusChange', (st) => {
+      console.log('Network status changed', st);
+      this.connectionState = st.connected;
+      this.connectionType = st.connectionType;
+    });
+
   }
 
   async logout() {
