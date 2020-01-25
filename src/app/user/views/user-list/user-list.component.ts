@@ -12,7 +12,7 @@ import { UserService, DjangoUser } from 'src/app/user/services';
 })
 export class UserListComponent implements OnInit {
 
-  data: boolean;
+  loading = false;
 
   displayedColumns: string[] = [
     'id',
@@ -28,16 +28,22 @@ export class UserListComponent implements OnInit {
     public userservice: UserService,
     private router: Router,
   ) {
-    this.data = true;
+
   }
 
-  ngOnInit() {
-    this.userservice.getUsers();
-    // this.userservice.getUsers().subscribe((response) => {
-    //   console.log(response);
-    //   this.data = true;
-    //   this.dataSource = response;
-    // });
+  async ngOnInit() {
+    try {
+      this.loading = true;
+      this.userservice.getUsers();
+      // this.userservice.getUsers().subscribe((response) => {
+      //   console.log(response);
+      //   this.data = true;
+      //   this.dataSource = response;
+      // });
+      this.loading = false;
+    } catch (error) {
+      this.loading = false;
+    }
   }
 
   /**

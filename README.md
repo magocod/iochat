@@ -11,7 +11,7 @@
 
 ## Demo Apk
 
-* Android Apk -> https://mega.nz/#!odl0RSYb!P219jb5-nm61XhTdkWRwtp4z37kzqbRumACfy0KDN_s
+* Android Apk -> https://mega.nz/#!lFs10IbJ!w6jksI_Rxs37qA4Db9LnKFcacCpVO78cCQZ1pdHJn0o
 
 ## Back-end Server
 

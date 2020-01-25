@@ -1,7 +1,7 @@
 
 <ion-content fullscreen>
 
-  <div *ngIf="data">
+  <div *ngIf="!loading">
   <!--   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
       <ion-fab-button color="primary">
         <ion-icon name="arrow-dropleft"></ion-icon>
@@ -48,7 +48,7 @@
     </ion-list>
   </div>
 
-  <div *ngIf="!data">
+  <div *ngIf="loading">
     <ion-list-header>
       <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
     </ion-list-header>
