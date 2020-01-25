@@ -10,6 +10,7 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -34,6 +35,7 @@ import { AuthModule } from 'src/app/auth';
   providers: [
     StatusBar,
     SplashScreen,
+    BackgroundMode,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

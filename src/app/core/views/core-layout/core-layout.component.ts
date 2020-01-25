@@ -77,7 +77,7 @@ export class CoreLayoutComponent implements OnInit {
     private router: Router,
     private auth: AuthService
   ) {
-    this.initializeApp();
+    // this.initializeApp();
   }
 
   initializeApp() {
