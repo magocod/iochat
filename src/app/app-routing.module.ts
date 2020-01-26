@@ -11,7 +11,8 @@ import {
 import {
   CoreLayoutComponent,
   AuthProfileComponent,
-  PageNotFoundComponent
+  PageNotFoundComponent,
+  ConfigProfileComponent
 } from 'src/app/core';
 
 const routes: Routes = [
@@ -40,6 +41,14 @@ const routes: Routes = [
       {
         path: 'profile',
         component: AuthProfileComponent,
+        data: {
+          roles: [0],
+          permissions: [0]
+        },
+      },
+      {
+        path: 'profile_config',
+        component: ConfigProfileComponent,
         data: {
           roles: [0],
           permissions: [0]

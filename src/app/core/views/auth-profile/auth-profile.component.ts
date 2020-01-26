@@ -7,7 +7,11 @@ import { catchError, finalize } from 'rxjs/operators';
 import { Plugins } from '@capacitor/core';
 const { Network } = Plugins;
 
-import { LoadingController } from '@ionic/angular';
+import {
+  LoadingController,
+  ModalController,
+  Platform
+} from '@ionic/angular';
 
 import {
   ChatwebsocketService,
@@ -22,6 +26,8 @@ import {
   DjangoUser
 } from 'src/app/user';
 
+import { CoreDeviceInfoComponent } from '../../components';
+
 
 @Component({
   selector: 'app-auth-profile',
@@ -29,6 +35,10 @@ import {
   styleUrls: ['./auth-profile.component.scss'],
 })
 export class AuthProfileComponent implements OnInit {
+
+  title = 'Profile Settings';
+
+  devicetype = '---';
 
   // roomsocket = true;
   // chatsocket = true;
@@ -50,9 +60,11 @@ export class AuthProfileComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private router: Router,
-    public loadingController: LoadingController,
     private chatwebsocketservice: ChatwebsocketService,
-    private roomwebsocketservice: RoomwebsocketService
+    private roomwebsocketservice: RoomwebsocketService,
+    public loadingController: LoadingController,
+    public modalController: ModalController,
+    public platform: Platform
   ) { }
 
   async ngOnInit() {
@@ -69,6 +81,15 @@ export class AuthProfileComponent implements OnInit {
       this.connectionState = st.connected;
       this.connectionType = st.connectionType;
     });
+
+    // device
+    const arr = this.platform.platforms();
+    // console.log(arr);
+    if (this.platform.is('android')) {
+      this.devicetype = 'Android';
+    } else if (this.platform.is('desktop')) {
+      this.devicetype = 'Desktop';
+    }
 
   }
 
@@ -126,6 +147,24 @@ export class AuthProfileComponent implements OnInit {
     } else {
       console.log('socket room active');
     }
+  }
+
+  /**
+   * [redirect description]
+   */
+  navigateConfigProfile(): void {
+    this.router.navigate(['/app/profile_config']);
+  }
+
+  /**
+   * [presentModal description]
+   */
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: CoreDeviceInfoComponent
+    });
+    await modal.present();
+    const event = await modal.onWillDismiss();
   }
 
 }

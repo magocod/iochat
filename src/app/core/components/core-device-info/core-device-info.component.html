@@ -1,0 +1,27 @@
+<ion-toolbar>
+  <ion-title>
+   Device information
+  </ion-title>
+  <ion-buttons slot="primary">
+    <ion-button (click)="dismiss()">
+      <ion-icon
+      	slot="icon-only"
+      	name="close"
+      ></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="assets/logo_cordova.png">
+      </ion-avatar>
+      <ion-label>
+        <h2>...</h2>
+        <h3>IMEI</h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

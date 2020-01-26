@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="redirect()">
+      	<ion-icon name="arrow-round-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      {{ title }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      <ion-label color="primary">---</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-avatar slot="start">
+        <ion-icon name="alert"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+        <h2>---</h2>
+        <h3>---</h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

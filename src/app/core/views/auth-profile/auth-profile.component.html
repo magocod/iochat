@@ -1,13 +1,4 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>
-      Profile Settings
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-core-header [title]="title"></app-core-header>
 
 <ion-content>
 	<ion-list>
@@ -23,9 +14,10 @@
       	<h3>email</h3>
 	    </ion-label>
 	    <ion-fab-button
-        color="tertiary"
+        color="primary"
         size="small"
         slot="end"
+        (click)="navigateConfigProfile()"
       >
         <ion-icon name="settings"></ion-icon>
       </ion-fab-button>
@@ -51,6 +43,23 @@
 	  <ion-list-header>
 	    <ion-label color="primary">CONNECTED</ion-label>
 	  </ion-list-header>
+	  <ion-item *ngIf="devicetype === 'Android'">
+	  	<ion-avatar slot="start">
+			  <ion-icon name="logo-android"></ion-icon>
+			</ion-avatar>
+	    <ion-label>
+	    	<h2>{{ devicetype }}</h2>
+	    	<h3>device information</h3>
+	    </ion-label>
+	    <ion-fab-button
+        color="primary"
+        size="small"
+        slot="end"
+        (click)="presentModal()"
+      >
+        <ion-icon name="phone-portrait"></ion-icon>
+      </ion-fab-button>
+	  </ion-item>
 	  <ion-item>
 	  	<ion-avatar slot="start">
 			  <ion-icon name="logo-rss"></ion-icon>

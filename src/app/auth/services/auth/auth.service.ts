@@ -113,7 +113,7 @@ export class AuthService {
     //   return true;
     // }
     const tk = await this.storage.get('token');
-    console.log(tk);
+    // console.log(tk);
     if (tk !== null) {
       return true;
     }

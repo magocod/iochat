@@ -5,9 +5,13 @@ import { IonicModule } from '@ionic/angular';
 import {
   CoreLayoutComponent,
   AuthProfileComponent,
-  PageNotFoundComponent
+  PageNotFoundComponent,
+  ConfigProfileComponent
 } from './views';
-import { CoreHeaderComponent } from './components';
+import {
+  CoreHeaderComponent,
+  CoreDeviceInfoComponent
+} from './components';
 
 
 @NgModule({
@@ -15,7 +19,9 @@ import { CoreHeaderComponent } from './components';
     CoreLayoutComponent,
     CoreHeaderComponent,
     PageNotFoundComponent,
-    AuthProfileComponent
+    AuthProfileComponent,
+    ConfigProfileComponent,
+    CoreDeviceInfoComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +32,9 @@ import { CoreHeaderComponent } from './components';
     CoreHeaderComponent,
     PageNotFoundComponent,
     AuthProfileComponent
-  ]
+  ],
+  entryComponents: [
+    CoreDeviceInfoComponent
+  ],
 })
 export class CoreModule {}
