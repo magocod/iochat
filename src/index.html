@@ -23,13 +23,32 @@
   <app-root></app-root>
 
   <!-- The core Firebase JS SDK is always required and must be listed first -->
-	<script src="/__/firebase/7.7.0/firebase-app.js"></script>
-
-	<!-- TODO: Add SDKs for Firebase products that you want to use -->
-	<script src="/__/firebase/7.7.0/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
+  <!-- TODO: Add SDKs for Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-analytics.js"></script>
+  <!-- Add the standard Performance Monitoring library -->
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-performance.js"></script>
 
 	<!-- Initialize Firebase -->
-	<script src="/__/firebase/init.js"></script>
+	<!-- <script src="/__/firebase/init.js"></script> -->
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyAxFhcA_5o3QBYCCADanspr_z_TFy1BDbo",
+      authDomain: "iochat-299c0.firebaseapp.com",
+      databaseURL: "https://iochat-299c0.firebaseio.com",
+      projectId: "iochat-299c0",
+      storageBucket: "iochat-299c0.appspot.com",
+      messagingSenderId: "315227455766",
+      appId: "1:315227455766:web:5f4ac80f2071cdb28e9037",
+      measurementId: "G-0LCF8NHV54"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    // Initialize Performance Monitoring and get a reference to the service
+    var perf = firebase.performance();
+  </script>
 
 </body>
 
